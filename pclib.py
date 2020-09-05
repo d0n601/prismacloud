@@ -10,7 +10,6 @@ def read_user():
     return (name)
 
 
-
 #######################################################################
 #  Function: read_pw
 #  Inputs: None
@@ -25,11 +24,41 @@ def read_pw():
 
 #######################################################################
 #  Function: read_api
-#  Inputs: None
+#  Inputs: String of comma seperated api endpoints
 #  Returns:
-#    pw - string
+#    select api url - string
 #######################################################################
-def read_api():
-    print("here")
-    api = 'https://api.prismacloud.io'
+def read_api(apiEndpoints):
+    iteration = 1
+    endpoints = []
+    for endpoint in apiEndpoints.split(', '):
+        print(iteration, ": ", endpoint)
+        endpoints.append(endpoint)
+        iteration += 1
+    selected = (int(input("API: "))-1)
+    api = endpoints[selected]
     return (api)
+
+
+#######################################################################
+#  Function: get_pc_token
+#  Inputs:
+#    user - string, username
+#    password - string, password
+#    api - string, api url
+#  Returns:
+#    token - string, auth token
+#######################################################################
+def get_pc_token(user,pw,api):
+    import requests
+    import json
+    url = api + "/login"
+    payload = "{\"username\":\"" + user + "\",\"password\":\"" + pw + "\"}"
+    headers = {
+        "accept": "application/json; charset=UTF-8",
+        "content-type": "application/json; charset=UTF-8"
+    }
+    response = requests.request("POST", url, data=payload, headers=headers)
+    token = (response.text)
+    jtoken = json.loads(token)
+    return (jtoken["token"])
