@@ -101,6 +101,7 @@ def get_pcc_token(user,password,api):
     import json
     url = api + "/api/v1/authenticate"
     payload = "{\"username\":\"" + user + "\",\"password\":\"" + password + "\"}"
+    print(payload)
     headers = {
         "accept": "application/json; charset=UTF-8",
         "content-type": "application/json; charset=UTF-8"
@@ -133,9 +134,9 @@ def get_input_string(question):
 def get_comp_policies(jwt,api):
     import requests
     import json
-    url = api + "/api/v1/policies/compliance/container"
-    
-    return("policies")
+    #url = api + "/api/v1/policies/compliance/container"
+    policies = "foo,bar"
+    return(policies)
 
 
 #######################################################################

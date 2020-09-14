@@ -15,8 +15,8 @@ api = config['prismacloudcompute']['api']
 # Check for user and password from config
 # If not, then get creds
 ####################################################################
-if (pcuser is ""): user = pclib.read_user()
-if (pcpass is ""): pw = pclib.read_pw()
+if (pcuser is ""): pcuser = pclib.read_user()
+if (pcpass is ""): pcpass = pclib.read_pw()
 
 
 ####################################################################
@@ -36,3 +36,4 @@ jwt = pclib.get_pcc_token(pcuser,pcpass,api)
 # Obtain Prisma Cloud Compute Compliance Policies
 ####################################################################
 comp_policies = pclib.get_comp_policies(jwt,api)
+print(comp_policies)
