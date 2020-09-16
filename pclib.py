@@ -101,7 +101,6 @@ def get_pcc_token(user,password,api):
     import json
     url = api + "/api/v1/authenticate"
     payload = "{\"username\":\"" + user + "\",\"password\":\"" + password + "\"}"
-    print(payload)
     headers = {
         "accept": "application/json; charset=UTF-8",
         "content-type": "application/json; charset=UTF-8"
@@ -125,21 +124,6 @@ def get_input_string(question):
 
 
 #######################################################################
-#  Function: get_comp_policies
-#  Inputs: jwt - string, token
-#          api - string, URL 
-#  Returns:
-#    comp_policies - string
-#######################################################################
-def get_comp_policies(jwt,api):
-    import requests
-    import json
-    #url = api + "/api/v1/policies/compliance/container"
-    policies = "foo,bar"
-    return(policies)
-
-
-#######################################################################
 #  Function: get_resource_to_query
 #  Inputs: 
 #          
@@ -156,3 +140,25 @@ def get_resource_to_query(resourceoptions):
     selected = (int(input("Resource: "))-1)
     resourceToQuery = resources[selected]
     return(resourceToQuery)
+
+
+#######################################################################
+#  Function: get_cloud_accounts
+#  Inputs: jwt authentication token
+#          api endoint to connect to
+#  Returns:
+#    accounts
+#######################################################################
+def get_cloud_accounts(jwt,api):
+    import requests
+    import json
+    url = api + "/cloud/name"
+    headers = {
+        "accept": "application/json; charset=UTF-8",
+        "x-redlock-auth": jwt
+    }
+    response = requests.request("GET", url, headers=headers)
+    print (response.text)
+    cloudAccounts = json.loads(response.text)
+    print (cloudAccounts["name"])
+    return (response.json())

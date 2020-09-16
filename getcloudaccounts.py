@@ -6,34 +6,36 @@ import configparser
 ####################################################################
 config = configparser.ConfigParser()
 config.read("config.ini")
-pcuser = config['prismacloudcompute']['pcuser']
-pcpass = config['prismacloudcompute']['pcpass']
-api = config['prismacloudcompute']['api']
+user = config['prismacloud']['accessKey']
+pw = config['prismacloud']['secret']
+api = config['prismacloud']['api']
+resourceoptions = config.options('pccresources')
 
 
 ####################################################################
 # Check for user and password from config
 # If not, then get creds
 ####################################################################
-if (pcuser is ""): pcuser = pclib.read_user()
-if (pcpass is ""): pcpass = pclib.read_pw()
+if (user is ""): user = pclib.read_user()
+if (pw is ""): pw = pclib.read_pw()
 
 
 ####################################################################
-# Obtain Prisma Cloud Compute API URL
+# Obtain Prisma Cloud Stack
 ####################################################################
 if (api is ""):
-    api = pclib.get_input_string("Enter Prisma Cloud Compute URL: ")
+    apiEndpoints = config['prismacloud']['apiEndpoints']
+    api = pclib.read_api(apiEndpoints)
 
 
 ####################################################################
 # Obtain Prisma Cloud token
 ####################################################################
-jwt = pclib.get_pcc_token(pcuser,pcpass,api)
+jwt = pclib.get_pc_token(user,pw,api)
 
 
 ####################################################################
-# Obtain Prisma Cloud Compute Compliance Policies
+# Get Cloud Accounts
 ####################################################################
-comp_policies = pclib.get_comp_policies(jwt,api)
-print(comp_policies)
+cloudAccounts = pclib.get_cloud_accounts(jwt,api)
+#print(cloudAccounts)
