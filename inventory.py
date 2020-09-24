@@ -16,14 +16,14 @@ resourceoptions = config.options('pccresources')
 # Check for user and password from config
 # If not, then get creds
 ####################################################################
-if (user is ""): user = pclib.read_user()
-if (pw is ""): pw = pclib.read_pw()
+if (user == ""): user = pclib.read_user()
+if (pw == ""): pw = pclib.read_pw()
 
 
 ####################################################################
 # Obtain Prisma Cloud Stack
 ####################################################################
-if (api is ""):
+if (api == ""):
     apiEndpoints = config['prismacloud']['apiEndpoints']
     api = pclib.read_api(apiEndpoints)
 
