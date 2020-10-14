@@ -1,5 +1,5 @@
 # Example scripts for gathering data from Prisma Cloud
 
-"inventory.py" will ask for inputs if not specified in config.ini.
-Requires the use of an API key if account has access to multiple tenants.
-
+config.ini: Set configuration values here
+execrql.py: Execute arbitrary config RQL queries
+inventory.py: Pull inventory data.  Uses config.ini for predefined asset types.
