@@ -94,7 +94,7 @@ def get_query_csv(jwt,queryresource,api):
 #  Returns:
 #    csv file
 #######################################################################
-def get_rql_csv(jwt,rql):
+def get_rql_csv(jwt,rql,api):
     import requests
     url = api + "/search/config"
     payload = "{\"query\":\"" + rql + "\",\"timeRange\":{\"type\":\"relative\",\"value\":{\"unit\":\"hour\",\"amount\":24}}}"

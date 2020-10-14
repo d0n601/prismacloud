@@ -42,4 +42,4 @@ rql = input("RQL: ")
 ####################################################################
 # Get RQL Response
 ####################################################################
-print(pclib.get_rql_csv(jwt,rql))
+print(pclib.get_rql_csv(jwt,rql,api))
