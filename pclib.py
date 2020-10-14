@@ -76,7 +76,28 @@ def get_pc_token(user,pw,api):
 def get_query_csv(jwt,queryresource,api):
     import requests
     url = api + "/search/config"
-    payload = "{\"query\":\"config where api.name = 'aws-ec2-describe-instances' \",\"timeRange\":{\"type\":\"relative\",\"value\":{\"unit\":\"hour\",\"amount\":24}}}"
+    payload = "{\"query\":\"config where api.name = '" + queryresource + "' \",\"timeRange\":{\"type\":\"relative\",\"value\":{\"unit\":\"hour\",\"amount\":24}}}"
+    headers = {
+        "accept": "text/csv; charset=UTF-8",
+        "content-type": "application/json; charset=UTF-8",
+        "x-redlock-auth": jwt
+    }
+    response = requests.request("POST", url, data=payload, headers=headers)
+    return(response.text)
+
+
+#######################################################################
+#  Function: get_rql_csv
+#  Inputs:
+#    jwt - string
+#    rql - string
+#  Returns:
+#    csv file
+#######################################################################
+def get_rql_csv(jwt,rql):
+    import requests
+    url = api + "/search/config"
+    payload = "{\"query\":\"" + rql + "\",\"timeRange\":{\"type\":\"relative\",\"value\":{\"unit\":\"hour\",\"amount\":24}}}"
     headers = {
         "accept": "text/csv; charset=UTF-8",
         "content-type": "application/json; charset=UTF-8",
