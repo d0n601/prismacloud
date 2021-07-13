@@ -109,8 +109,6 @@ def main():
     pcAzureAccounts = getPCAzureAccounts(args.pcConsole,pcToken)
     pccAzureCredentials = getPCCCredentials(args.pccConsole,pccToken)
     addAccountsToPCC = getPccAddAccounts(pcAzureAccounts,pccAzureCredentials)
-    addAccountsToPCC = dict()
-    addAccountsToPCC['36f0aad9-f7a6-45af-9816-11195ef95f6d'] = 'sub-z-corp-cofint-p-001 - 36f0aad9 (Emerson Azure Root Tenant)'
     setUpPCCAccounts(args.pccConsole,pccToken,addAccountsToPCC)
 
 if __name__ == '__main__':
