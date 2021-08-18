@@ -65,7 +65,9 @@ def main():
     args = parse_args()
     pccToken = getPCCToken(args.pccConsole,args.apiKey,args.apiSecret)
     allActiveIncidents = getActiveIncidents(args.pccConsole,pccToken)
-    archiveIncidents(args.pccConsole,pccToken,allActiveIncidents)
+    while allActiveIncidents:
+        archiveIncidents(args.pccConsole,pccToken,allActiveIncidents)
+        allActiveIncidents = getActiveIncidents(args.pccConsole,pccToken)
 
 if __name__ == '__main__':
     sys.exit(main())
